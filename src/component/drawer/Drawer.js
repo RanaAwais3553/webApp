@@ -1,26 +1,31 @@
-import React from 'react';
-import clsx from 'clsx';
+import { MenuItem, MenuList } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
+import { useHistory, withRouter } from 'react-router-dom';
+
 import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import {BrowserRouter} from 'react-router-dom'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import Collapse from '@material-ui/core/Collapse';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Divider from '@material-ui/core/Divider';
+import Drawer from '@material-ui/core/Drawer';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import IconButton from '@material-ui/core/IconButton';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
+import MenuIcon from '@material-ui/icons/Menu';
+import PrimarySearchAppBar from '../appbar/AppBar'
+import React from 'react';
 import StarBorder from '@material-ui/icons/StarBorder';
-import Collapse from '@material-ui/core/Collapse';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import clsx from 'clsx';
 
 const drawerWidth = 240;
 
@@ -51,8 +56,7 @@ const useStyles = makeStyles((theme) => ({
   },
   drawer: {
     width: drawerWidth,
-    flexShrink: 0,
-    whiteSpace: 'nowrap',
+
   },
   drawerOpen: {
     width: drawerWidth,
@@ -84,27 +88,73 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
+  menuDrawerStyle:{
+    minHeight:"20px",
+    lineHeight: "49px",      // Smaller: Height of menu item row
+  },
 }));
 
-export default function MiniDrawer() {
+ function MiniDrawer(props) {
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
-  const [opendropdown, setOpenDropdown] = React.useState(true);
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
+  const { history } = props;
+//   const [open, setOpen] = React.useState(false);
+//   const [opendropdown, setOpenDropdown] = React.useState(true);
+  
+// // App Bar Start
 
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-  const handleClick = () => {
-    setOpenDropdown(!opendropdown);
-  };
+
+// // App Bar End
+
+  
+//   const handleDrawerOpen = () => {
+//     setOpen(true);
+//   };
+
+//   const handleDrawerClose = () => {
+//     setOpen(false);
+//   };
+//   const handleClick = () => {
+//     setOpenDropdown(!opendropdown);
+//   };
+
+const itemsList = [
+    {
+      text: "Dashboard",
+      icon: <InboxIcon />,
+      onClick: () => history.push("/")
+    },
+    {
+      text: "Student",
+      icon: <MailIcon />,
+      onClick: () => history.push("/student")
+    },
+    {
+      text: "Staff",
+      icon: <MailIcon />,
+      onClick: () => history.push("/staff")
+    },
+    {
+        text: "Result",
+        icon: <MailIcon />,
+        onClick: () => history.push("/result")
+      },
+      {
+        text: "Account",
+        icon: <MailIcon />,
+        onClick: () => history.push("/account")
+      },
+      {
+        text: "Staff",
+        icon: <MailIcon />,
+        onClick: () => history.push("/contact")
+      }
+  ];
+
 
   return (
     <div className={classes.root}>
-      <CssBaseline />
+      {/* <CssBaseline />
       <AppBar
         position="fixed"
         className={clsx(classes.appBar, {
@@ -127,80 +177,40 @@ export default function MiniDrawer() {
             Mini variant drawer
           </Typography>
         </Toolbar>
-      </AppBar>
+      </AppBar> */}
+
       <Drawer
         variant="permanent"
         className={clsx(classes.drawer, {
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open,
+          [classes.drawerOpen]: props.open,
+          [classes.drawerClose]: !props.open,
         })}
         classes={{
           paper: clsx({
-            [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open,
+            [classes.drawerOpen]: props.open,
+            [classes.drawerClose]: !props.open,
           }),
         }}
       >
         <div className={classes.toolbar}>
-          <IconButton onClick={handleDrawerClose}>
+          <IconButton onClick={props.handleDrawerClose}>
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </div>
         <Divider />
         <List>
-        <ListItem button>
-            <ListItemIcon><MailIcon /></ListItemIcon>
-          <ListItemText primary="All mail"/>
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon><MailIcon /></ListItemIcon>
-          <ListItemText primary="All mail"/>
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon><InboxIcon /></ListItemIcon>
-          <ListItemText primary="Inbox"/>
-          </ListItem>
-        </List>
-        <Divider />
-        <List>
-          {/* {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+        {itemsList.map((item, index) => {
+          const { text, icon, onClick } = item;
+          return (
+            <ListItem button key={text} onClick={onClick}>
+              {icon && <ListItemIcon>{icon}</ListItemIcon>}
               <ListItemText primary={text} />
             </ListItem>
-          ))} */}
-          <ListItem button>
-            <ListItemIcon><InboxIcon /></ListItemIcon>
-          <ListItemText primary="All mail"/>
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon><InboxIcon /></ListItemIcon>
-          <ListItemText primary="All mail"/>
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon><InboxIcon /></ListItemIcon>
-          <ListItemText primary="All mail"/>
-          </ListItem>
-          <ListItem button onClick={handleClick}>
-        <ListItemIcon>
-          <InboxIcon />
-        </ListItemIcon>
-        <ListItemText primary="Inbox" />
-        {opendropdown ? <ExpandLess /> : <ExpandMore />}
-      </ListItem>
-      <Collapse in={opendropdown} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          <ListItem button className={classes.nested}>
-            <ListItemIcon>
-              <StarBorder />
-            </ListItemIcon>
-            <ListItemText primary="Starred" />
-          </ListItem>
-        </List>
-      </Collapse>
-        </List>
+          );
+        })}
+      </List>
       </Drawer>
-      <main className={classes.content}>
+      {/* <main className={classes.content}>
         <div className={classes.toolbar} />
         <Typography paragraph>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
@@ -225,7 +235,8 @@ export default function MiniDrawer() {
           nibh sit. Ornare aenean euismod elementum nisi quis eleifend. Commodo viverra maecenas
           accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam ultrices sagittis orci a.
         </Typography>
-      </main>
+      </main> */}
     </div>
   );
-}
+};
+export default withRouter(MiniDrawer);

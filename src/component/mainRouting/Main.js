@@ -1,12 +1,12 @@
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 
-import Account from './component/views/account/Account';
-import Dashboard from './component/views/dashboard/Dashboard'
-import PrimarySearchAppBar from './component/appbar/AppBar'
+import Account from './../views/account/Account';
+import Dashboard from '../views/dashboard/Dashboard'
+import PrimarySearchAppBar from '../appbar/AppBar'
 import React from "react";
-import Result from './component/views/result/Result';
-import Staff from './component/views/staff/Staff'
-import Students from './component/views/student/Students'
+import Result from './../views/result/Result';
+import Staff from '../views/staff/Staff'
+import Students from '../views/student/Students'
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
@@ -15,12 +15,11 @@ const useStyles = makeStyles({
   }
 });
 
- function App() {
+ function Main() {
   const classes = useStyles();
   return (
     <div className={classes.container}>
       <PrimarySearchAppBar/>
-      <BrowserRouter>
       <Switch>
         <Route exact from="/" Component={Dashboard} />
         <Route exact path="/student" render={props => <Students {...props} />} />
@@ -29,8 +28,7 @@ const useStyles = makeStyles({
         <Route exact path="/account" render={props => <Account {...props} />} />
      
       </Switch>
-      </BrowserRouter>
     </div>
   );
 }
-export default App
+export default Main
