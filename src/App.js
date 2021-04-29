@@ -1,7 +1,8 @@
-import {BrowserRouter, Route, Switch} from "react-router-dom";
+import {Route, BrowserRouter as Router, Switch} from "react-router-dom";
 
 import Account from './component/views/account/Account';
 import Dashboard from './component/views/dashboard/Dashboard'
+import MiniDrawer from './component/drawer/Drawer'
 import PrimarySearchAppBar from './component/appbar/AppBar'
 import React from "react";
 import Result from './component/views/result/Result';
@@ -19,17 +20,18 @@ const useStyles = makeStyles({
   const classes = useStyles();
   return (
     <div className={classes.container}>
+      <Router>
       <PrimarySearchAppBar/>
-      <BrowserRouter>
+      {/* <MiniDrawer/> */}
       <Switch>
-        <Route exact from="/" Component={Dashboard} />
+        <Route exact from="/" render={props => <Dashboard {...props} />} />
         <Route exact path="/student" render={props => <Students {...props} />} />
         <Route exact path="/staff" render={props => <Staff {...props} />} />
         <Route exact path="/result" render={props => <Result {...props} />} />
         <Route exact path="/account" render={props => <Account {...props} />} />
      
       </Switch>
-      </BrowserRouter>
+      </Router>
     </div>
   );
 }

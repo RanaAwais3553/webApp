@@ -2,7 +2,7 @@ import React from 'react'
 
 function Dashboard() {
     return (
-        <div style={{}}>
+        <div style={{marginTop:'100px',float:'left'}}>
             <h1>
             Dashboard lorem ipsum lorem ipsum
             </h1>
