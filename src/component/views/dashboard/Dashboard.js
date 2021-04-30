@@ -2,8 +2,8 @@ import React from 'react'
 
 function Dashboard() {
     return (
-        <div style={{marginTop:'100px',float:'left'}}>
-            <h1>
+        <div style={{paddingTop:40}}>
+            <h1 >
             Dashboard lorem ipsum lorem ipsum
             </h1>
         </div>

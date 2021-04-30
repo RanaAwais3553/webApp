@@ -21,8 +21,8 @@ const useStyles = makeStyles({
   return (
     <div className={classes.container}>
       <Router>
-      <PrimarySearchAppBar/>
-      {/* <MiniDrawer/> */}
+      {/* <PrimarySearchAppBar/> */}
+      <MiniDrawer/>
       <Switch>
         <Route exact from="/" render={props => <Dashboard {...props} />} />
         <Route exact path="/student" render={props => <Students {...props} />} />
