@@ -1,11 +1,32 @@
 import React from 'react'
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+const drawerWidth = 240;
+
+ const useStyles = makeStyles((theme) => ({
+ // necessary for content to be below app bar
+ toolbar: theme.mixins.toolbar,
+ drawerPaper: {
+   width: drawerWidth,
+ },
+ content: {
+   flexGrow: 1,
+   padding: theme.spacing(3),
+ }, 
+}));
 
 function UserProfile() {
+  const classes = useStyles();
+
     return (
-        <div>
-            UserProfile
+        <main className={classes.content}>
+            <div className={classes.toolbar} />
+   <div style={{}}>
+            <h1 >
+            UserProfile lorem ipsum lorem ipsum
+            </h1>
         </div>
+        </main>
     )
 }
-
 export default UserProfile
+
