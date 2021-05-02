@@ -31,7 +31,7 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import {useHistory} from 'react-router-dom'
 // Routes Array 
 
-import useStyles from '../../AllStyle';
+import useStyles from '../../AllStyle.js';
 
 const drawerWidth = 240;
 
@@ -212,7 +212,7 @@ const itemsList = [
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
-            Material-UI
+            Dashboard
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>

@@ -53,7 +53,7 @@ const whiteColor = "#FFF";
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
+    padding: theme.spacing(2),
   },
 
   // App Bar Styling Start
